@@ -1,0 +1,40 @@
+const express = require("express");
+require("./config/dba");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require('cors');
+
+const PORT = 5000;
+const authRoute = require("./routes/authentification");
+const { checkClient, requireAuth } = require("./middlewares/authMiddleware");
+const clientRoute = require('./routes/client');
+const commandeRoute = require('./routes/commande');
+
+
+
+
+
+const app = express();
+
+app.use(cors());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
+
+
+//JWT
+app.get('*', checkClient);
+app.get('/jwtid', requireAuth, (request, response) => {
+    response.status(200).send(response.locals.eleve._id);
+})
+
+//routes
+app.use('/api/v1', authRoute);
+app.use('/api/v1', commandeRoute);
+app.use('/api/v1', clientRoute);
+
+
+app.listen(PORT, () => {
+    console.log(`le serveur est lancé au port`+ ` `+ `${PORT}`);
+});
