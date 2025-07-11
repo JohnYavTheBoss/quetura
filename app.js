@@ -26,7 +26,7 @@ app.use(cookieParser());
 //JWT
 app.get('*', checkClient);
 app.get('/jwtid', requireAuth, (request, response) => {
-    response.status(200).send(response.locals.eleve._id);
+    response.status(200).send(response.locals.client._id);
 })
 
 //routes
