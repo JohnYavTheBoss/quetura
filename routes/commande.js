@@ -2,7 +2,7 @@ const { Router } = require('express');
 const multer = require('multer');
 const path = require('path');
 const uid = require('uuid');
-const { commander, modifierCommande, getAllUserCommandes } = require('../controllers/commande');
+const { commander, modifierCommande, getAllUserCommandes, getCommandes } = require('../controllers/commande');
 
 const router = Router();
 
@@ -34,6 +34,7 @@ const upload = multer(
 router.post('/command/add', upload.single('document'), commander);
 router.put('/command/pay/:id', modifierCommande);
 router.get('/command/getusercommand/:id', getAllUserCommandes);
+router.get('/command/get/', getCommandes);
 
 
 module.exports = router;

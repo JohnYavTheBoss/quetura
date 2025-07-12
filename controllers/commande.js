@@ -1,6 +1,18 @@
 const CommandeModel = require("../models/commande");
 const NotificationModel = require("../models/notification");
 
+module.exports.getCommandes = async (request, response) => {
+  try {
+    await CommandeModel.find()
+      .select()
+      .sort({ createdAt: -1 })
+      .then((data) => {
+        if (data) return response.status(200).json(data);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports.getAllUserCommandes = async (request, response) => {
   try {
     await CommandeModel.find({ client: request.params.id })
