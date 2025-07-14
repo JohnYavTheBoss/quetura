@@ -42,8 +42,7 @@ module.exports.commander = async (request, response) => {
             image: image,
             prix: prix,
           },
-          document:
-            request.file.filename != null ? document : "commande sans document",
+          document: request.file.filename ,
           prix: prix,
           quantite: qt,
           total: prix * qt,
