@@ -28,6 +28,7 @@ module.exports.getAllUserCommandes = async (request, response) => {
 
 module.exports.commander = async (request, response) => {
   let { client, id, categorie, prix, qt, image } = request.body;
+  console.log(request.file);
 
   try {
     if (request.file !== undefined) {
@@ -42,7 +43,7 @@ module.exports.commander = async (request, response) => {
             image: image,
             prix: prix,
           },
-          document: request.file.filename ,
+          document: request.file.filename,
           prix: prix,
           quantite: qt,
           total: prix * qt,
