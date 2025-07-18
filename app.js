@@ -9,8 +9,7 @@ const authRoute = require("./routes/authentification");
 const { checkClient, requireAuth, requireAuthCaisse, checkCaissier } = require("./middlewares/authMiddleware");
 const clientRoute = require('./routes/client');
 const commandeRoute = require('./routes/commande');
-
-
+const caissierRoute = require('./routes/caissier');
 
 
 
@@ -37,6 +36,7 @@ app.get('/jwtidCaissier', requireAuthCaisse, (request, response) => {
 app.use('/api/v1', authRoute);
 app.use('/api/v1', commandeRoute);
 app.use('/api/v1', clientRoute);
+app.use('/api/v1', caissierRoute);
 
 
 app.listen(PORT, () => {
