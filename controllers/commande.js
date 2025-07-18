@@ -32,17 +32,12 @@ module.exports.commander = async (request, response) => {
 
   try {
     if (request.file !== undefined) {
-      let document = request.file.filename;
-
       (
         await CommandeModel.create({
           client: client,
-          catalogue: {
-            id: id,
-            categorie: categorie,
-            image: image,
-            prix: prix,
-          },
+          catalogue: image,
+          id: id,
+          categorie: categorie,
           document: request.file.filename,
           prix: prix,
           quantite: qt,
@@ -56,13 +51,10 @@ module.exports.commander = async (request, response) => {
     } else {
       (
         await CommandeModel.create({
-          client: client,
-          catalogue: {
-            id: id,
-            categorie: categorie,
-            image: image,
-            prix: prix,
-          },
+         client: client,
+          catalogue: image,
+          id: id,
+          categorie: categorie,
           prix: prix,
           quantite: qt,
           total: prix * qt,
