@@ -18,12 +18,9 @@ module.exports.signInClient = async (request, response) => {
   try {
     await ClientModel.findOne({ telephone: telephone }).then(async (data) => {
       if (data) {
-        return response
-          .status(400)
-          .json({
-            error:
-              "Ce numéro de téléphone est déjà pris, Choisissez un autre !",
-          });
+        return response.status(400).json({
+          error: "Ce numéro de téléphone est déjà pris, Choisissez un autre !",
+        });
       } else {
         (
           await ClientModel.create({
@@ -87,18 +84,16 @@ module.exports.loginClient = async (request, response) => {
 };
 
 module.exports.signInCaissier = async (request, response) => {
-  let { nom, postnom, prenom, telephone, psw } = request.body;
+  let { nom, prenom, telephone, psw } = request.body;
   var password = await bcrypt.hashSync(psw, await bcrypt.genSaltSync(10));
 
   try {
     await CaissierModel.findOne({ telephone: telephone }).then(async (data) => {
       if (data) {
-        return response
-          .status(400)
-          .json({
-            error:
-              "Ce numéro de téléphone est déjà utilisé, Veuillez utiliser un autre",
-          });
+        return response.status(400).json({
+          error:
+            "Ce numéro de téléphone est déjà utilisé, Veuillez utiliser un autre",
+        });
       } else {
         (
           await CaissierModel.create({
@@ -111,7 +106,7 @@ module.exports.signInCaissier = async (request, response) => {
           .save()
           .then((data) => {
             var token = createToken(data._id);
-            response.cookie("jwt", token, {
+            response.cookie("jwtCaisse", token, {
               httpOnly: true,
               maxAge: 365 * 24 * 60 * 60 * 1000,
             });
@@ -136,7 +131,7 @@ module.exports.loginCaissier = async (request, response) => {
           var password = await bcrypt.compareSync(psw, data.password);
           if (password == true) {
             var token = createToken(data._id);
-            response.cookie("jwt", token, {
+            response.cookie("jwtCaisse", token, {
               httpOnly: true,
               maxAge: 365 * 24 * 60 * 60 * 1000,
             });

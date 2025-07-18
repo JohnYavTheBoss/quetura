@@ -7,4 +7,5 @@ router.get('/client/getAllclient');
 router.get('/client/get/:id', getClient);
 
 
+
 module.exports = router;

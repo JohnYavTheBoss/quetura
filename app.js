@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const PORT = 5000;
 const authRoute = require("./routes/authentification");
-const { checkClient, requireAuth } = require("./middlewares/authMiddleware");
+const { checkClient, requireAuth, requireAuthCaisse, checkCaissier } = require("./middlewares/authMiddleware");
 const clientRoute = require('./routes/client');
 const commandeRoute = require('./routes/commande');
 
@@ -25,8 +25,12 @@ app.use(cookieParser());
 
 //JWT
 app.get('*', checkClient);
+app.get('*', checkCaissier);
 app.get('/jwtid', requireAuth, (request, response) => {
     response.status(200).send(response.locals.client._id);
+})
+app.get('/jwtidCaissier', requireAuthCaisse, (request, response) => {
+    response.status(200).send(response.locals.caissier._id);
 })
 
 //routes
