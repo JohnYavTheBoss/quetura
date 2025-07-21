@@ -3,9 +3,19 @@ const Schemas = mongoose.Schema;
 
 const NotificationSchemas = new Schemas(
   {
-    recepteur: String,
+    receveur: String,
     envoyeur: String,
-    continue: String,
+    command: String,
+    message: String,
+    statut: {
+      type: String,
+      enums: ["lu","non lu"],
+      default: "non lu"
+    },
+    date: {
+      type: Date,
+      default: Date.now
+    }
   },
   { timestamps: true }
 );

@@ -13,9 +13,8 @@ const CommandeSchema = new Schemas(
     categorie: String,
     document: String,
     notification: String,
-     prix: Number,
+    prix: Number,
     quantite: Number,
-   
     total: Number,
     livraison: String,
     payement: String,
