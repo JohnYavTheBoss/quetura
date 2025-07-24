@@ -9,6 +9,7 @@ const CommandeSchema = new Schemas(
       required: true,
     },
     catalogue: String,
+    urlImage: String,
     id: Number,
     categorie: String,
     document: String,

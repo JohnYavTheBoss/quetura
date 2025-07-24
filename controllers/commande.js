@@ -27,7 +27,7 @@ module.exports.getAllUserCommandes = async (request, response) => {
 };
 
 module.exports.commander = async (request, response) => {
-  let { client, id, categorie, prix, qt, image } = request.body;
+  let { client, id, categorie, prix, qt, image, urlImage } = request.body;
   console.log(request.file);
 
   try {
@@ -36,6 +36,7 @@ module.exports.commander = async (request, response) => {
         await CommandeModel.create({
           client: client,
           catalogue: image,
+          urlImage: urlImage,
           id: id,
           categorie: categorie,
           document: request.file.filename,
@@ -53,6 +54,7 @@ module.exports.commander = async (request, response) => {
         await CommandeModel.create({
          client: client,
           catalogue: image,
+          urlImage: urlImage,
           id: id,
           categorie: categorie,
           prix: prix,
