@@ -7,6 +7,7 @@ const {
   modifierCommande,
   getAllUserCommandes,
   getCommandes,
+  removeCommand,
 } = require("../controllers/commande");
 
 const router = Router();
@@ -50,9 +51,11 @@ const upload = multer({
   },
 });
 
+router.delete("/command/delete/:id", removeCommand);
 router.post("/command/add", upload.single("document"), commander);
 router.put("/command/pay/:id", modifierCommande);
 router.get("/command/getusercommand/:id", getAllUserCommandes);
 router.get("/command/get/", getCommandes);
+
 
 module.exports = router;

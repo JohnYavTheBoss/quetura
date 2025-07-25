@@ -52,7 +52,7 @@ module.exports.commander = async (request, response) => {
     } else {
       (
         await CommandeModel.create({
-         client: client,
+          client: client,
           catalogue: image,
           urlImage: urlImage,
           id: id,
@@ -102,5 +102,19 @@ module.exports.modifierCommande = async (request, response) => {
     });
   } catch (error) {
     console.error(error);
+  }
+};
+
+module.exports.removeCommand = async (request, response) => {
+  console.log(request.params.id);
+  
+  try {
+    await CommandeModel.deleteOne({ _id: request.params.id }).then(
+      (data) => {
+        if (data) return response.status(200).json(data);
+      }
+    );
+  } catch (error) {
+    console.log(error);
   }
 };
